@@ -1,0 +1,29 @@
+# --- Archivos de Sistema y Backup ---
+*~
+*.bak
+*.old
+*.tmp
+.DS_Store
+
+# --- Directorios Sensibles (No subir) ---
+.config/google-chrome/
+.config/vlc/
+.config/dconf/
+.ssh/
+.gnupg/
+
+# --- Python / Node (Scripts de automatización) ---
+__pycache__/
+*.py[cod]
+node_modules/
+
+# --- Logs y Cache ---
+.cache/
+.dbus/
+.local/share/xorg/
+Xrootenv
+
+# --- Binarios de modelos (LLMs post-instalación) ---
+models/
+*.bin
+*.gguf
