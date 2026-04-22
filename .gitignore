@@ -1,29 +1,47 @@
-# --- Archivos de Sistema y Backup ---
+# =============================================================================
+# .gitignore — Dotfiles i3
+# =============================================================================
+
+# Archivos de caché y temporales
+*.swp
+*.swo
 *~
-*.bak
-*.old
-*.tmp
 .DS_Store
+Thumbs.db
 
-# --- Directorios Sensibles (No subir) ---
-.config/google-chrome/
-.config/vlc/
-.config/dconf/
+# Directorios de caché generados en runtime
+.config/*/cache/
+.config/*/__pycache__/
+**/__pycache__/
+*.pyc
+
+# Logs
+*.log
+/tmp/
+
+# Archivos sensibles — NUNCA commitear
+.config/*/secrets
+.config/*/credentials
+*passwd*
+*token*
+*api_key*
 .ssh/
-.gnupg/
 
-# --- Python / Node (Scripts de automatización) ---
-__pycache__/
-*.py[cod]
-node_modules/
+# Eww — compilados temporales
+.config/eww/target/
 
-# --- Logs y Cache ---
-.cache/
-.dbus/
-.local/share/xorg/
-Xrootenv
+# Nitrogen — rutas absolutas de wallpaper (cambian por máquina)
+.config/nitrogen/bg-saved.cfg
 
-# --- Binarios de modelos (LLMs post-instalación) ---
-models/
-*.bin
-*.gguf
+# Temas GTK generados automáticamente
+.config/gtk-3.0/bookmarks
+.config/gtk-4.0/
+
+# arandr — configs generadas (cada máquina tiene sus propios nombres de salida)
+# EXCEPCIÓN: puedes versionar los .sh que generes manualmente
+.config/autorandr/
+
+# Archivos específicos del sistema local
+.config/mimeapps.list
+.config/user-dirs.dirs
+.config/user-dirs.locale
