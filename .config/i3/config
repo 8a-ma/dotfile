@@ -1,0 +1,54 @@
+# =============================================================================
+# i3-gaps Config - Proyecto Hypr-i3
+# Hardware: ThinkPad L440 (Intel HD 4600)
+# =============================================================================
+
+# Definir tecla Mod (Super/Windows)
+set $mod Mod4
+
+#fuente
+font pango:JetBrainsMono Nerd Font 10
+
+# --- Estética Gaps ---
+for_window [class=".*"] border pixel 2
+gaps inner 10
+gaps outer 5
+smart_gaps on
+smart_borders on
+
+# --- Autostart ---
+exec_always --no-startup-id picom --config ~/.config/picom.conf
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec --no-startup-id nm-applet
+exec --no-startup-id nitrogen --restore
+
+# --- Atajos de Teclado (Dev workflow) ---
+bindsym $mod+Return exec kitty
+bindsym $mod+q kill
+bindsym $mod+d exec rofi -show drun
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec i3-nagbar -t warning -m '¿Salir de i3?' -B 'Si' 'i3-msg exit'
+
+# --- Gestión de Workspaces ---
+set $ws1 "1: Terminal"
+set $ws2 "2: Web"
+set $ws3 "3: Dev"
+set $ws4 "4: Media"
+
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+
+# Mover ventana a workspace
+bindsym $mod+Shift move container to workspace number $ws1
+bindsym $mod+Shift move container to workspace number $ws2
+bindsym $mod+Shift move container to workspace number $ws3
+bindsym $mod+Shift move container to workspace number $ws4
+
+# --- Scratchpad (Notas/Logs) ---
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# ---Soporte VGA ---
+bindsym $mod+p exec --no-startup-id ~/.config/i3/scripts/vga_setup.sh
