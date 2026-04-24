@@ -47,6 +47,7 @@ mkdir -p ~/scripts
 # 4. Ejecución modular de scripts (Inspirado en JaKooLit)
 # Los scripts se encuentran en install-scripts/
 chmod +x install-scripts/*.sh
+chmod +x dotfiles/scripts/*.sh
 
 echo -e "${YELLOW}📦 Instalando dependencias base...${NC}"
 ./install-scripts/00-dependencies.sh
@@ -63,6 +64,7 @@ sudo apt install --no-install-recommends -y blueman network-manager-gnome [cite:
 
 # 5. Aplicación de Dotfiles
 echo -e "${YELLOW}📂 Aplicando configuraciones (Dotfiles)...${NC}"
+./dotfiles/scripts/02-check-gpu.sh
 cp -r dotfiles/* ~/.config/
 
 # 6. Configuración de Optimización LLM (ZRAM y Prioridad)
