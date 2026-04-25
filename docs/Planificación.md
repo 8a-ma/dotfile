@@ -30,7 +30,6 @@ A continuación, el paso a paso detallado para coordinar las IA y los archivos a
 - **Archivos a desarrollar:**
     - `dotfiles/polybar/config.ini` Barra de estado con módulos específicos para la batería del ThinkPad, CPU y RAM.
     - `scripts/llm_monitor.sh` Script que Polybar ejecutará para mostrar el consumo de recursos de los modelos LLM en tiempo real.
-
     - Script de instalación para `nm-applet` y `blueman-applet` (para asegurar la bandeja del sistema). 
 - **Consideraciones de optimización:**
     - Configura intervalos de actualización largos (ej. 5s o 10s) en Polybar para reducir el uso constante de CPU.
