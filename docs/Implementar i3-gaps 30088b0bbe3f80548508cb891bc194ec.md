@@ -20,7 +20,7 @@ Para codificar y diseñar sistemas en Linux Mint con i3-gaps en un ThinkPad L440
 
 | **Acción** | **Atajo ($mod=Win)** |
 | --- | --- |
-| Terminal (kitty/alacritty) | $mod+Enter |
+| Terminal (zsh) | $mod+Enter |
 | Nueva ventana | $mod+Enter |
 | Workspaces (1-10) | $mod+1 a $mod+0 |
 | Mover ventana | $mod+Shift+<num> |
@@ -32,8 +32,8 @@ Configura `bindsym $mod+d exec dmenu_run` para launchers rápidos.
 
 ### **Herramientas de Desarrollo**
 
-- **Editor/IDE**: Neovim (`vim-plug`), VS Code (`code --install-extension ms-vscode.cpptools`).
-- **Terminal dev**: Alacritty + tmux + zsh (Oh My Zsh); `sudo apt install build-essential git curl`.
+- **Editor/IDE**: VS Code (`code --install-extension ms-vscode.cpptools`).
+- **Terminal dev**: zsh (Oh My Zsh); `sudo apt install build-essential git curl`.
 - **Gestión**: LazyGit, Docker (para contenedores), Podman; Polybar para status (CPU/RAM/batería).
 - **Diseño sistemas**: Draw.io (diagrama.cl), PlantUML para UML en Markdown.
 
