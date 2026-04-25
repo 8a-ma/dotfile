@@ -115,3 +115,7 @@ for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [class="Blueman-manager"] floating enable
 for_window [class="Pavucontrol"] floating enable
+
+# Priorizar el servidor X y picom sobre procesos de fondo (LLM)
+exec --no-startup-id renice -n -5 $(pgrep -x Xorg)
+exec --no-startup-id renice -n -5 $(pgrep -x picom)
