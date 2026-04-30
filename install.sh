@@ -98,3 +98,6 @@ sudo apt update
 echo -e "${YELLOW}📦 Instalando dependencias base...${NC}"
 sleep 1
 execute_script "00-dependencies.sh" | tee -a "$LOG"
+
+# https://github.com/JaKooLit/Ubuntu-Hyprland/tree/24.04/install-scripts
+# https://github.com/8a-ma/dotfile/tree/main
