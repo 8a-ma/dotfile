@@ -77,3 +77,24 @@ execute_script() {
 }
 
 ##################################
+# List of services to check for active login managers
+check_services_running() {
+    if systemctl is-active --quiet display-manager.service && dpkg -l | grep -qw lightdm; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+if ! check_services_running; then
+    echo "${RED}Error: No se detectó un gestor de sesión activo. Abortando instalación.${NC}" | tee -a "$LOG"
+    exit 1
+fi
+
+##################################
+echo "${YELLOW} Corriendo una update completa al sistema...${NC}" | tee -a "$LOG"
+sudo apt update
+
+echo -e "${YELLOW}📦 Instalando dependencias base...${NC}"
+sleep 1
+execute_script "00-dependencies.sh" | tee -a "$LOG"
