@@ -32,7 +32,7 @@ El sistema se organiza por aplicación en la carpeta de configuración:
 ## Instalación Rápida
 1. Clonar el repositorio:
 ```bash
-git clone [https://github.com/8a-ma/dotfile.git](https://github.com/8a-ma/dotfile.git) ~/dotfile
+git clone https://github.com/8a-ma/dotfile.git ~/dotfile
 ```
 
 2. Ejecutar el orquestador:
@@ -64,4 +64,4 @@ La barra de Polybar incluye un módulo dedicado de monitoreo de LLM:
 - **Función:** Muestra en tiempo real el consumo de recursos del proceso de inferencia y el estado de la carga térmica.
 ---
 Para más detalles técnicos sobre la creación de widgets y ajustes finos del kernel, consulta:
-(Documentación Técnica: Optimización y Widgets)[./docs/optimization_tech.md]
+[Documentación Técnica: Optimización y Widgets](./docs/optimization_tech.md)
