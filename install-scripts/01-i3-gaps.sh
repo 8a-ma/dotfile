@@ -10,7 +10,9 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-echo -e "${YELLOW}🪟 Instalando i3-wm y componentes del entorno...${NC}"
+LOG=".install-logs/01-i3-gaps-$(date +$%d_%H:%M:%S).log"
+
+echo -e "${YELLOW}🪟 Instalando i3-wm y componentes del entorno...${NC}" | tee -a "$LOG"
 
 # 1. Instalación de i3 y utilidades base de escritorio
 # Instalamos i3-wm (soporta gaps nativamente en Mint 22) y herramientas ligeras
@@ -27,15 +29,15 @@ sudo apt install -y \
     nitrogen
 
 # 2. Instalación de Polybar
-echo -e "${YELLOW}📊 Instalando Polybar para una interfaz moderna...${NC}"
+echo -e "${YELLOW}📊 Instalando Polybar para una interfaz moderna...${NC}" | tee -a "$LOG"
 sudo apt install -y polybar
 
 # 3. Terminal: Kitty o Alacritty (Altamente recomendados para LLMs por rendimiento)
-echo -e "${YELLOW}💻 Instalando emulador de terminal (Kitty)...${NC}"
+echo -e "${YELLOW}💻 Instalando emulador de terminal (Kitty)...${NC}" | tee -a "$LOG"
 sudo apt install -y kitty
 
 # 4. Configuración de fuentes (Crucial para iconos en la barra)
-echo -e "${YELLOW}🔤 Instalando fuentes (Font Awesome & Nerd Fonts)...${NC}"
+echo -e "${YELLOW}🔤 Instalando fuentes (Font Awesome & Nerd Fonts)...${NC}" | tee -a "$LOG"
 sudo apt install -y fonts-font-awesome fonts-noto-color-emoji
 
 # 5. Creación de directorios de configuración si no existen
@@ -46,7 +48,7 @@ mkdir -p ~/.config/rofi
 
 # 6. Preparación de archivos de configuración
 # 6.1 I3 creamos el config
-echo -e "${YELLOW}⚡ Generando configuración optimizada para I3...${NC}"
+echo -e "${YELLOW}⚡ Generando configuración optimizada para I3...${NC}" | tee -a "$LOG"
 cat <<EOF > ~/.config/i3/config
 # =============================================================================
 # i3-gaps Config - Proyecto 8a-ma/dotfile (Mint Edition)
@@ -172,7 +174,7 @@ EOF
 
 
 # 6.2 Picom creamos un config base optimizado para no consumir CPU (Configuración Anti-Tearing para Intel HD 4600)
-echo -e "${YELLOW}⚡ Generando configuración optimizada para Picom...${NC}"
+echo -e "${YELLOW}⚡ Generando configuración optimizada para Picom...${NC}" | tee -a "$LOG"
 cat <<EOF > ~/.config/picom/picom.conf
 backend = "glx";
 glx-no-stencil = true;
@@ -189,4 +191,4 @@ use-damage = true;
 log-level = "warn";
 EOF
 
-echo -e "${GREEN}✅ Fase 01: i3-wm y componentes instalados correctamente.${NC}"
+echo -e "${GREEN}✅ Fase 01: i3-wm y componentes instalados correctamente.${NC}" | tee -a "$LOG"

@@ -20,7 +20,7 @@ if [ ! -d .install-logs ]; then
     mkdir .install-logs
 fi
 
-LOG=".install-logs/01-Installer-Scripts-$(date +$%d_%H:%M:%S).log"
+LOG=".install-logs/00-Installer-Scripts-$(date +$%d_%H:%M:%S).log"
 
 # 2. Verificación de privilegios (No ejecutar como root, pero requerir sudo)
 if [ "$EUID" -eq 0 ]; then 
@@ -98,6 +98,10 @@ sudo apt update
 echo -e "${YELLOW}📦 Instalando dependencias base...${NC}"
 sleep 1
 execute_script "00-dependencies.sh" | tee -a "$LOG"
+
+echo -e "${YELLOW}📦 Instalando y configurando i3-gaps...${NC}"
+sleep 1
+execute_script "01-i3-gaps.sh" | tee -a "$LOG"
 
 # https://github.com/JaKooLit/Ubuntu-Hyprland/tree/24.04/install-scripts
 # https://github.com/8a-ma/dotfile/tree/main
