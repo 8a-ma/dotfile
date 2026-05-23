@@ -9,5 +9,8 @@
 !i3/
 !i3/**
 
+!kitty/
+!kitty/**
+
 !*.gitignore
 !*.md
