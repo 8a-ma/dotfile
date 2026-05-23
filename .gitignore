@@ -6,5 +6,8 @@
 !.github/
 !.github/**
 
+!i3/
+!i3/**
+
 !*.gitignore
 !*.md
