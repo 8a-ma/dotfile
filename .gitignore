@@ -12,5 +12,8 @@
 !kitty/
 !kitty/**
 
+!rofi/
+!rofi/**
+
 !*.gitignore
 !*.md
