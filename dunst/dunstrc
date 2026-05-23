@@ -1,0 +1,43 @@
+[global]
+    ### Display ###
+
+    monitor = 0
+
+    follow = none
+
+    width = (0, 300)
+    height = 300
+
+    origin = top-right
+
+    offset = 30x30
+
+    scale = 0
+
+    notification_limit = 6
+
+    ### Progress bar ###
+    progress_bar = true
+
+    progress_bar_height = 10
+
+    progress_bar_frame_width = 1
+
+    progress_bar_min_width = 150
+
+    progress_bar_max_width = 300
+
+    # Show how many messages are currently hidden (because of
+    # notification_limit).
+    indicate_hidden = yes
+
+    transparency = 0
+
+    separator_height = 2
+
+    padding = 10
+
+    horizontal_padding = 8
+
+    text_icon_padding = 12
+    # |https://github.com/bokub/i3-config/blob/master/dunstrc
