@@ -22,9 +22,10 @@ git clone https://github.com/8a-ma/dotfile.git ~/dotfile
 # To-Do
 - [ ] Reconfiguración
     - [ ] I3
-        - [ ] Separación de configuración en archivos de con responsabilidad única (bindkeys, Autostart-apps, workspaces, etc..)
-        - [ ] Implementación del uso de xrandr para resoluciones externas vía mDP
-        - [ ] Monitoreo de RAM con `htop`
+        - [X] Separación de configuración en archivos de con responsabilidad única (bindkeys, Autostart-apps, workspaces, etc..)
+        - [~] Implementación del uso de xrandr para resoluciones externas vía mDP
+        - [ ] I3 status
+            - [ ] Monitoreo de RAM con `htop`
         - [ ] Confiugarciones de wifi con piperwire
     - [ ] Kitty
     - [ ] Dunst
