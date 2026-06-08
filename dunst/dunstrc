@@ -1,43 +1,225 @@
+# =============================================================================
+# dunstrc — Notificaciones
+# Paleta: Catppuccin Mocha
+# Hardware: ThinkPad L440 — Intel HD Graphics 4600
+# =============================================================================
+
 [global]
-    ### Display ###
 
-    monitor = 0
+    # -------------------------------------------------------------------------
+    # DISPLAY
+    # -------------------------------------------------------------------------
 
-    follow = none
+    monitor          = 0
+    follow           = none
 
-    width = (0, 300)
-    height = 300
+    # Ancho dinámico: mínimo 200, máximo 320px
+    width            = (200, 320)
+    height           = 200
 
-    origin = top-right
+    origin           = top-right
+    offset           = 16x16
 
-    offset = 30x30
+    # Sin escala forzada — deja que X maneje el DPI
+    scale            = 0
 
-    scale = 0
+    notification_limit = 5
 
-    notification_limit = 6
+    # -------------------------------------------------------------------------
+    # APARIENCIA
+    # -------------------------------------------------------------------------
 
-    ### Progress bar ###
-    progress_bar = true
+    # Sin transparencia — más liviano para la iGPU
+    transparency     = 0
 
-    progress_bar_height = 10
+    # Padding interno — suficiente espacio para que el texto respire
+    padding          = 12
+    horizontal_padding = 14
+    text_icon_padding  = 10
 
-    progress_bar_frame_width = 1
-
-    progress_bar_min_width = 150
-
-    progress_bar_max_width = 300
-
-    # Show how many messages are currently hidden (because of
-    # notification_limit).
-    indicate_hidden = yes
-
-    transparency = 0
-
+    # Separador entre notificaciones apiladas
     separator_height = 2
+    separator_color  = "#313244"
 
-    padding = 10
+    # Borde
+    frame_width      = 1
+    frame_color      = "#313244"
 
-    horizontal_padding = 8
+    # Radio de esquinas: 0 = coherente con border-radius 0 de rofi/i3
+    corner_radius    = 0
 
-    text_icon_padding = 12
-    # |https://github.com/bokub/i3-config/blob/master/dunstrc
+    # -------------------------------------------------------------------------
+    # ICONOS
+    # -------------------------------------------------------------------------
+
+    # Solo brillo y audio llevarán ícono; el resto no los necesita.
+    # Dunst usa los iconos del tema del sistema (heredado de GTK/hicolor).
+    icon_theme       = "hicolor, Adwaita"
+    enable_recursive_icon_lookup = true
+
+    icon_position    = left
+    min_icon_size    = 24
+    max_icon_size    = 32
+
+    # -------------------------------------------------------------------------
+    # FUENTE
+    # -------------------------------------------------------------------------
+
+    font = monospace 9
+
+    # -------------------------------------------------------------------------
+    # FORMATO DEL TEXTO
+    # -------------------------------------------------------------------------
+
+    # %s = resumen (summary)  %b = cuerpo (body)
+    format           = "<b>%s</b>\n%b"
+
+    markup           = full
+    word_wrap        = yes
+
+    # Acorta textos demasiado largos con puntos suspensivos
+    ellipsize        = middle
+
+    # -------------------------------------------------------------------------
+    # BARRA DE PROGRESO (brillo/volumen)
+    # -------------------------------------------------------------------------
+
+    progress_bar                = true
+    progress_bar_height         = 8
+    progress_bar_frame_width    = 1
+    progress_bar_min_width      = 160
+    progress_bar_max_width      = 280
+    progress_bar_corner_radius  = 0
+
+    # -------------------------------------------------------------------------
+    # COMPORTAMIENTO
+    # -------------------------------------------------------------------------
+
+    show_age_threshold  = 60
+    hide_duplicate_count = false
+    indicate_hidden     = yes
+
+    # Sin ordenamiento especial
+    sort                = yes
+
+    # Idle: no molestar si el sistema lleva más de 120 s sin actividad
+    idle_threshold      = 120
+
+    # El mouse izquierdo cierra; derecho abre la acción si la hay
+    mouse_left_click    = close_current
+    mouse_middle_click  = do_action, close_current
+    mouse_right_click   = close_all
+
+    # -------------------------------------------------------------------------
+    # RENDIMIENTO — Intel HD Graphics 4600
+    # -------------------------------------------------------------------------
+
+    # Fuerza el render por software; evita glitches en Mesa i965
+    force_xinerama      = false
+
+    # Sin animaciones — reduce carga en la iGPU
+    # (dunst no tiene animaciones nativas, pero forzamos composición mínima)
+    # Si se usas picom en el futuro, este valor evita sombras en notificaciones:
+    # class_name = "dunst"  → shadow = false  (configúralo en picom.conf)
+
+    # -------------------------------------------------------------------------
+    # MISC
+    # -------------------------------------------------------------------------
+
+    browser              = /usr/bin/xdg-open
+    dmenu                = /usr/bin/rofi -dmenu -p "Acción:"
+    always_run_script    = true
+    title                = "Dunst"
+    class                = "Dunst"
+    ignore_newline       = no
+    stack_duplicates     = true
+
+
+# =============================================================================
+# URGENCIAS
+# =============================================================================
+#
+# Paleta de referencia:
+#   base      #1e1e2e   fondo principal
+#   surface   #313244   fondo alternativo / borde
+#   text      #cdd6f4   texto principal
+#   subtext   #585b70   texto secundario
+#   blue      #89b4fa   info / low
+#   yellow    #f9e2af   advertencia / normal
+#   red       #f38ba8   urgente / critical
+#   mauve     #cba6f7   acento
+# =============================================================================
+
+[urgency_low]
+    background   = "#1e1e2e"
+    foreground   = "#585b70"
+    frame_color  = "#313244"
+    timeout      = 4
+    # Notificaciones informativas: timeout corto, color apagado
+
+[urgency_normal]
+    background   = "#1e1e2e"
+    foreground   = "#cdd6f4"
+    frame_color  = "#313244"
+    timeout      = 6
+
+[urgency_critical]
+    background   = "#1e1e2e"
+    foreground   = "#f38ba8"
+    frame_color  = "#f38ba8"
+    timeout      = 0
+    # timeout = 0 → persiste hasta que el usuario la cierre
+
+
+# =============================================================================
+# REGLAS POR APLICACIÓN
+# =============================================================================
+
+# --- Volumen (pactl / PulseAudio / pipewire-pulse)
+# playerctl y scripts de pactl suelen enviar el nombre "Volume" o "Audio"
+[volume]
+    appname         = "pactl"
+    summary         = "*olume*"
+    icon            = "audio-volume-high"
+    history_ignore  = yes
+
+# Regla genérica para capturar cambios de volumen por nombre de ícono
+[volume_icon]
+    match_transient = true
+    icon            = "audio-volume*"
+    history_ignore  = yes
+
+# --- Brillo (brightnessctl / light / xbacklight)
+[brightness]
+    appname         = "brightnessctl"
+    icon            = "display-brightness"
+    history_ignore  = yes
+
+[brightness_alt]
+    appname         = "brightness"
+    icon            = "display-brightness"
+    history_ignore  = yes
+
+# --- Silencio (mute)
+[mute]
+    summary         = "*ute*"
+    icon            = "audio-volume-muted"
+    history_ignore  = yes
+
+# --- Media (playerctl)
+[playerctl]
+    appname     = "playerctl"
+    timeout     = 3
+    icon        = "media-playback-start"
+
+# --- Notificaciones de batería baja (upower)
+[battery_low]
+    appname     = "upower"
+    urgency     = critical
+    icon        = "battery-caution"
+
+# --- NetworkManager
+[network]
+    appname     = "NetworkManager"
+    icon        = "network-wireless"
+    timeout     = 5

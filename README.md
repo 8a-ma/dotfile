@@ -27,7 +27,7 @@ git clone https://github.com/8a-ma/dotfile.git ~/dotfile
         - [X] I3 status
             - [~] Monitoreo de RAM con `htop`
     - [X] Kitty
-    - [ ] Dunst
+    - [X] Dunst
     - [ ] Rofi
 - [ ] Optimización i3-status para bajo consumo de ciclos
 - [ ] Implementación ZRAM con un ratio 1:1.5
