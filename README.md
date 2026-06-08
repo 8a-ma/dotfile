@@ -21,13 +21,12 @@ git clone https://github.com/8a-ma/dotfile.git ~/dotfile
 # Optimización local
 # To-Do
 - [ ] Reconfiguración
-    - [ ] I3
+    - [X] I3
         - [X] Separación de configuración en archivos de con responsabilidad única (bindkeys, Autostart-apps, workspaces, etc..)
         - [~] Implementación del uso de xrandr para resoluciones externas vía mDP
-        - [ ] I3 status
-            - [ ] Monitoreo de RAM con `htop`
-        - [ ] Confiugarciones de wifi con piperwire
-    - [ ] Kitty
+        - [X] I3 status
+            - [~] Monitoreo de RAM con `htop`
+    - [X] Kitty
     - [ ] Dunst
     - [ ] Rofi
 - [ ] Optimización i3-status para bajo consumo de ciclos
