@@ -29,6 +29,9 @@ git clone https://github.com/8a-ma/dotfile.git ~/dotfile
     - [X] Kitty
     - [X] Dunst
     - [ ] Rofi
+        - [X] Launcher
+        - [ ] wallpaper selector
+        - [ ] Powermenu
 - [ ] Optimización i3-status para bajo consumo de ciclos
 - [ ] Implementación ZRAM con un ratio 1:1.5
 - [ ] Implementación picom

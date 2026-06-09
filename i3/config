@@ -6,7 +6,7 @@
 # --- Variables Principales
 set $mod Mod4
 set $term kitty --config ~/.config/kitty/kitty.conf
-set $menu bash ~/.config/rofi/launchers/type-4/launcher.sh
+set $menu bash ~/.config/rofi/launcher/launcher.sh
 set $refresh_i3status killall -SIGUSR1 i3status
 
 # --- Fuente base
