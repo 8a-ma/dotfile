@@ -1,0 +1,149 @@
+/**
+ * ws.rasi — Wallpaper Selector Theme
+ * Paleta: Catppuccin Mocha (coherente con style-1.rasi y i3status)
+ * Optimizado: sin sombras, sin bordes innecesarios, renderizado ligero
+ **/
+
+/*****----- Global Properties -----*****/
+* {
+    /* Catppuccin Mocha */
+    bg:          #1e1e2e;
+    bg-alt:      #313244;
+    fg:          #cdd6f4;
+    fg-dim:      #585b70;
+    selected-bg: #313244;
+    selected-fg: #cdd6f4;
+    accent:      #89b4fa;
+    border-col:  #313244;
+    urgent:      #f38ba8;
+
+    background-color: transparent;
+    text-color:       @fg;
+}
+
+/*****----- Main Window -----*****/
+window {
+    transparency:     "real";
+    location:         center;
+    anchor:           center;
+    fullscreen:       false;
+    width:            520px;
+
+    enabled:          true;
+    margin:           0px;
+    padding:          0px;
+    border:           1px solid;
+    border-radius:    0px;
+    border-color:     @border-col;
+    background-color: @bg;
+    cursor:           "default";
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:          true;
+    spacing:          0px;
+    margin:           0px;
+    padding:          0px;
+    background-color: transparent;
+    children:         [ "inputbar", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:          true;
+    spacing:          8px;
+    margin:           0px;
+    padding:          10px 12px;
+    border:           0px 0px 1px 0px;
+    border-color:     @border-col;
+    background-color: @bg-alt;
+    text-color:       @fg;
+    children:         [ "prompt", "entry" ];
+}
+
+prompt {
+    enabled:          true;
+    background-color: inherit;
+    text-color:       @accent;
+}
+
+entry {
+    enabled:          true;
+    background-color: inherit;
+    text-color:       @fg;
+    cursor:           text;
+    placeholder:      "Buscar wallpaper...";
+    placeholder-color: @fg-dim;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:          true;
+    columns:          3;
+    lines:            3;
+    cycle:            true;
+    dynamic:          false;
+    scrollbar:        false;
+    layout:           vertical;
+    reverse:          false;
+    fixed-height:     true;
+    fixed-columns:    true;
+
+    spacing:          1px;
+    margin:           0px;
+    padding:          8px;
+    border:           0px;
+    background-color: @bg;
+    text-color:       @fg;
+    cursor:           "default";
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:          true;
+    spacing:          6px;
+    margin:           0px;
+    padding:          8px 6px;
+    border:           0px;
+    border-radius:    0px;
+    background-color: transparent;
+    text-color:       @fg;
+    cursor:           pointer;
+    orientation:      vertical;
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color:       @fg;
+}
+
+element selected.normal {
+    background-color: @selected-bg;
+    text-color:       @selected-fg;
+    border:           1px solid;
+    border-color:     @accent;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color:       @fg;
+}
+
+element-icon {
+    background-color: transparent;
+    text-color:       inherit;
+    size:             100px;
+    cursor:           inherit;
+    horizontal-align: 0.5;
+}
+
+element-text {
+    background-color: transparent;
+    text-color:       @fg-dim;
+    highlight:        none;
+    cursor:           inherit;
+    vertical-align:   0.5;
+    horizontal-align: 0.5;
+    font:             "monospace 8";
+}

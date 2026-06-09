@@ -2,50 +2,89 @@
 
 WALLPAPER_DIR="$HOME/Pictures/wallpapers"
 THUMBNAIL_DIR="$HOME/.cache/wallpaper-thumbs"
-ROFI_FONT="Monospace 10"
-THUMB_SIZE=120
+THEME="$HOME/.config/rofi/wallpaper/ws.rasi"
+THUMB_SIZE=200
 
-# Crear carpetas si no existe
+# --- Crear carpetas si no existen
 mkdir -p "$WALLPAPER_DIR"
 mkdir -p "$THUMBNAIL_DIR"
 
-# Generar miniaturas solo si faltan
-for img in "$WALLPAPER_DIR"/*.{jpg,jpeg,png,gif,webp}; do
+# --- Función para generar una miniatura
+make_thumb() {
+    local src="$1"
+    local dst="$2"
+    # Intenta convert (ImageMagick) primero, luego gm (GraphicsMagick)
+    if command -v convert &>/dev/null; then
+        convert -thumbnail "${THUMB_SIZE}x${THUMB_SIZE}^" \
+                -gravity center -extent "${THUMB_SIZE}x${THUMB_SIZE}" \
+                "$src" "$dst" 2>/dev/null
+    elif command -v gm &>/dev/null; then
+        gm convert -thumbnail "${THUMB_SIZE}x${THUMB_SIZE}^" \
+                   -gravity center -extent "${THUMB_SIZE}x${THUMB_SIZE}" \
+                   "$src" "$dst" 2>/dev/null
+    else
+        echo "Error: se necesita imagemagick o graphicsmagick para las miniaturas" >&2
+        exit 1
+    fi
+}
+
+# --- Generar miniaturas solo si faltan o el original es más nuevo
+shopt -s nullglob
+images=("$WALLPAPER_DIR"/*.{jpg,jpeg,png,gif,webp})
+shopt -u nullglob
+
+if [ ${#images[@]} -eq 0 ]; then
+    notify-send -u normal "Wallpaper" "No se encontraron imágenes en $WALLPAPER_DIR"
+    exit 0
+fi
+
+for img in "${images[@]}"; do
     [ -f "$img" ] || continue
     base=$(basename "$img")
     thumb="$THUMBNAIL_DIR/${base%.*}.png"
-    
     if [ ! -f "$thumb" ] || [ "$img" -nt "$thumb" ]; then
-        convert -resize "${THUMB_SIZE}x${THUMB_SIZE}>" "$img" "$thumb" 2>/dev/null || \
-        magick -resize "${THUMB_SIZE}x${THUMB_SIZE}>" "$img" "$thumb" 2>/dev/null
+        make_thumb "$img" "$thumb"
     fi
 done
 
-# Crear lista para rofi con miniaturas
-mapfile -t images < <(ls "$WALLPAPER_DIR"/*.{jpg,jpeg,png,gif,webp} 2>/dev/null)
+# --- Construir lista para rofi: nombre visible + ícono (miniatura)
 list=""
 for img in "${images[@]}"; do
     [ -f "$img" ] || continue
     base=$(basename "$img")
     thumb="$THUMBNAIL_DIR/${base%.*}.png"
-    
-    list+="$base\x00icon\x1f$thumb\n"
+    # Nombre sin extensión para que sea más limpio en la UI
+    label="${base%.*}"
+    list+="${label}\x00icon\x1f${thumb}\n"
 done
 
-# Mostrar en Rofi con miniaturas
-selected=$(echo -ne "$list" | rofi -dmenu -p "Wallpaper" \
+# --- Mostrar Rofi con tema personalizado
+selected=$(echo -ne "$list" | rofi \
+    -dmenu \
+    -p "  Wallpaper" \
     -i \
-    -font "$ROFI_FONT" \
-    -width 40 \
-    -show-icons)
+    -show-icons \
+    -theme "$THEME")
 
 [ -z "$selected" ] && exit 0
 
-# Aplicar wallpaper con feh
-wallpaper="$WALLPAPER_DIR/$selected"
+# --- Reconstruir la ruta completa buscando la extensión original
+wallpaper=""
+for img in "${images[@]}"; do
+    base=$(basename "$img")
+    label="${base%.*}"
+    if [ "$label" = "$selected" ]; then
+        wallpaper="$img"
+        break
+    fi
+done
 
-if [ -f "$wallpaper" ]; then
-    feh --bg-fill "$wallpaper"
-else
-    echo "Error: file not found ($wallpaper)"
+if [ -z "$wallpaper" ] || [ ! -f "$wallpaper" ]; then
+    notify-send -u critical "Wallpaper" "No se encontró el archivo: $selected"
+    exit 1
 fi
+
+# --- Aplicar con feh
+# --no-fehbg se omite intencionalmente: feh escribe ~/.fehbg automáticamente,
+# lo que permite que el wallpaper persista entre sesiones vía autostart.
+feh --bg-fill "$wallpaper"
