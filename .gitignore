@@ -18,5 +18,8 @@
 !dunst/
 !dunst/**
 
+!zram/
+!zram/**
+
 !*.gitignore
 !*.md
