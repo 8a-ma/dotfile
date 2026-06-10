@@ -21,5 +21,8 @@
 !zram/
 !zram/**
 
+!system/
+!system/**
+
 !*.gitignore
 !*.md
