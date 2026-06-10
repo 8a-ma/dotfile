@@ -28,11 +28,11 @@ git clone https://github.com/8a-ma/dotfile.git ~/dotfile
             - [~] Monitoreo de RAM con `htop`
     - [X] Kitty
     - [X] Dunst
-    - [ ] Rofi
+    - [~] Rofi
         - [X] Launcher
-        - [ ] wallpaper selector
-        - [ ] Powermenu
-- [ ] Optimización i3-status para bajo consumo de ciclos
-- [ ] Implementación ZRAM con un ratio 1:1.5
-- [ ] Implementación picom
+        - [X] wallpaper selector
+        - [~] Powermenu
+- [~] Optimización i3-status para bajo consumo de ciclos
+- [~] Implementación ZRAM con un ratio 1:1.5
+- [~] Implementación picom
 - [ ] terminar README
