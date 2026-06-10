@@ -34,7 +34,5 @@ git clone https://github.com/8a-ma/dotfile.git ~/dotfile
         - [~] Powermenu
 - [~] Optimización i3-status para bajo consumo de ciclos
 - [X] Implementación ZRAM
-- [ ] Implementar `enable_fbc=1` en i915
-- [ ] Typo en `autostart.conf`, governor de CPU
 - [ ] Unificar paleta de colores (launcher/powermenu a Catppuccin)
     - [ ] Algoritmo que detecta los colores del wallpaper y los propaga en todo los otros dotfiles 
