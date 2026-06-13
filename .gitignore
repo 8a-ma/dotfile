@@ -24,5 +24,10 @@
 !system/
 !system/**
 
+!scripts/
+!scripts/**
+
 !*.gitignore
 !*.md
+
+!install.sh
